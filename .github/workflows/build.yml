@@ -11,7 +11,8 @@ jobs:
     - name: libbox indir
       run: |
         mkdir -p app/libs
-        URL=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/tags/v1.10.7 | grep -o 'https://[^"]*libbox[^"]*\.aar' | head -1)
+        URL=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/SagerNet/sing-box/releases/tags/v1.10.7 | grep -o 'https://[^"]*\.aar' | head -1)
+        echo "İndiriliyor: $URL"
         curl -L -o app/libs/libbox.aar "$URL"
     - uses: gradle/actions/setup-gradle@v4
     - name: derle
